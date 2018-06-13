@@ -1,10 +1,13 @@
 
 
 
-bimodal_random_gaudists <- function(sampsize1=100, mean1=2, sd1=1, sampsize2=100, mean2=2, sd2=1, pltMe=F, repl=F){
+bimodal_random_gaudists <- function(sampsize1=100, mean1=2, sd1=1, 
+                                    sampsize2=100, mean2=5, sd2=1, 
+                                    pltMe=F, repl=F, save2png=F){
   
   # library(ggplot2)
   # source("rbin/effect_size.R")
+  # source("rbin/multiplot.R")
   # sampsize1=100; mean1=0; sd1=1;
   # sampsize2=100; mean2=5; sd2=1;
   # pltMe = T
@@ -41,9 +44,10 @@ bimodal_random_gaudists <- function(sampsize1=100, mean1=2, sd1=1, sampsize2=100
                    outlier.size=4) + theme(legend.position = "none") +
       coord_flip()
     
-    png(file = paste("SimViz",sampsize1, mean1, sd1, sampsize2, mean2, sd2,as.character(round(runif(1, 10000, 99999))) , ".png",sep="_"), bg = "transparent", width = 1200, height = 1600, units = "px", res=150)
-    multiplot(pp1, pp3, pp2, cols=1)
-    dev.off(); multiplot(pp1, pp3, pp2, cols=1)
+    if(save2png) {
+      png(file = paste("SimViz",sampsize1, mean1, sd1, sampsize2, mean2, sd2,as.character(round(runif(1, 10000, 99999))) , ".png",sep="_"), bg = "transparent", width = 1200, height = 1600, units = "px", res=150)
+      multiplot(pp1, pp3, pp2, cols=1)
+      dev.off() } else multiplot(pp1, pp3, pp2, cols=1)
     
   }
   
